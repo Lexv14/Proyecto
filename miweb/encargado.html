@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Encargado - Panel</title>
+  <!-- Estilos CSS del panel -->
+  <style>
+    /* Estilos generales del cuerpo */
+    body {
+      margin: 0;
+      display: flex;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #d7ccc8;
+      color: #333;
+    }
+
+    /* Barra lateral izquierda */
+    .sidebar {
+      width: 250px;
+      background-color: #4e342e;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 40px;
+      height: 100vh;
+      box-sizing: border-box;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Botones del menú lateral */
+    .sidebar button {
+      width: 80%;
+      padding: 20px;
+      margin: 10px 0;
+      font-size: 18px;
+      background-color: #6d4c41;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      letter-spacing: 0.5px;
+    }
+
+    .sidebar button:hover {
+      background-color: #8d6e63;
+      transform: translateY(-2px);
+    }
+
+    /* Contenido principal del panel */
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      background: #ffffff;
+      overflow-y: auto;
+      box-sizing: border-box;
+      min-height: 100vh;
+      border-radius: 8px;
+      margin: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Sección de perfil del encargado */
+    .profile {
+      text-align: center;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .profile img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fbc02d;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile h2 {
+      margin-top: 20px;
+      color: #3e2723;
+      font-size: 2em;
+      letter-spacing: 1px;
+    }
+
+    .profile p {
+      color: #5d4037;
+      font-size: 1.1em;
+    }
+
+    /* Botón para cerrar sesión */
+    .btn-cerrar {
+      margin-top: 40px;
+      padding: 14px 25px;
+      font-size: 17px;
+      background-color: #c62828;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-cerrar:hover {
+      background-color: #ef5350;
+      transform: translateY(-2px);
+    }
+
+    /* Estilos para las tarjetas de peticiones */
+    .peticion-item {
+      border: 1px solid #bcaaa4;
+      background: #fffde7;
+      margin: 15px 0;
+      padding: 20px;
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    .peticion-item p {
+      margin: 8px 0;
+      color: #5d4037;
+      line-height: 1.5;
+    }
+    .peticion-item strong {
+      color: #3e2723;
+    }
+    /* Botones generales */
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-right: 15px;
+      color: white;
+      font-weight: bold;
+      user-select: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    /* Botones específicos por tipo */
+    .btn-aceptar { 
+      background: #388e3c; 
+    }
+    .btn-aceptar:hover { 
+      background: #4caf50; 
+      transform: translateY(-1px); 
+    }
+    .btn-rechazar { 
+      background: #d32f2f; 
+    }
+    .btn-rechazar:hover { 
+      background: #f44336; 
+      transform: translateY(-1px); 
+    }
+    .btn-entrega { 
+      background: #1976d2; 
+    }
+    .btn-entrega:hover { 
+      background: #2196F3; 
+      transform: translateY(-1px); 
+    }
+    .btn-eliminar { 
+      background: #5d4037; 
+      margin-left: 10px; 
+    }
+    .btn-eliminar:hover { 
+      background: #795548; 
+      transform: translateY(-1px); 
+    }
+
+    /* Encabezados */
+    h2 {
+      color: #3e2723;
+      margin-bottom: 25px;
+      text-align: center;
+      font-size: 2.2em;
+    }
+
+    h3 {
+      color: #3e2723;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      font-size: 1.8em;
+      border-bottom: 2px solid #bcaaa4;
+      padding-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Barra lateral con navegación -->
+  <div class="sidebar">
+    <button onclick="mostrarSeccion('cuenta')">Cuenta</button>
+    <button onclick="mostrarSeccion('peticionEmpleado')">Petición de empleado</button>
+    <button onclick="mostrarSeccion('historial')">Historial</button>
+  </div>
+
+  <!-- Contenedor de contenido dinámico -->
+  <div class="main-content" id="contenido"></div>
+
+  <!-- Lógica del panel con JavaScript -->
+  <script>
+    // Función para mostrar diferentes secciones del panel
+    function mostrarSeccion(seccion) {
+      const contenido = document.getElementById('contenido');
+
+      if (seccion === 'cuenta') {
+        contenido.innerHTML = `
+          <div class="profile">
+            <img src="imagenes/perfil_predeterminado_empleado.webp" alt="Foto del encargado" />
+            <h2>Jorge Candela</h2>
+            <p>Usuario: encargado1</p>
+            <button class="btn-cerrar" onclick="cerrarSesion()">Cerrar sesión</button>
+          </div>
+        `;
+      } else if (seccion === 'peticionEmpleado') {
+        contenido.innerHTML = `
+          <h2>Petición de empleado</h2>
+          <div id="listaPeticiones"></div>
+        `;
+        mostrarPeticionesDeEmpleado();
+      } else if (seccion === 'historial') {
+        contenido.innerHTML = `
+          <h2>Historial</h2>
+          <div id="historialAceptados">
+            <h3>Aceptados</h3>
+            <div id="aceptados"></div>
+          </div>
+          <div id="historialRechazados" style="margin-top: 30px;">
+            <h3>Rechazados</h3>
+            <div id="rechazados"></div>
+          </div>
+        `;
+        mostrarHistorial();
+      }
+    }
+
+    // Redirige al login (cerrar sesión)
+    function cerrarSesion() {
+      window.location.href = 'index.html';
+    }
+
+    // Muestra las peticiones pendientes
+    function mostrarPeticionesDeEmpleado() {
+      const lista = document.getElementById('listaPeticiones');
+      const datos = JSON.parse(localStorage.getItem('peticionesEmpleado') || '[]');
+
+      if (datos.length === 0) {
+        lista.innerHTML = '<p>No hay peticiones pendientes.</p>';
+        return;
+      }
+
+      lista.innerHTML = '';
+      datos.forEach((pet, i) => {
+        if (!pet.id) {
+          pet.id = Date.now() + Math.random();
+        }
+
+        const div = document.createElement('div');
+        div.className = 'peticion-item';
+        div.innerHTML = `
+          <p><strong>Producto:</strong> ${pet.producto}</p>
+          <p><strong>Cantidad:</strong> ${pet.cantidad}</p>
+          <p><strong>Motivo:</strong> ${pet.motivo}</p>
+          <div style="margin-top: 10px;">
+            <button class="btn btn-aceptar" onclick="aceptarPeticion('${pet.id}')">Aceptar</button>
+            <button class="btn btn-rechazar" onclick="rechazarPeticion('${pet.id}')">Rechazar</button>
+          </div>
+        `;
+        lista.appendChild(div);
+      });
+
+      localStorage.setItem('peticionesEmpleado', JSON.stringify(datos));
+    }
+
+    // Acepta una petición
+    function aceptarPeticion(id) {
+      let peticiones = JSON.parse(localStorage.getItem('peticionesEmpleado') || '[]');
+      let historial = JSON.parse(localStorage.getItem('historialPeticiones') || '[]');
+
+      const index = peticiones.findIndex(pet => pet.id == id);
+      if (index === -1) return;
+
+      const peticion = peticiones.splice(index, 1)[0];
+      peticion.estado = 'Aceptada';
+      peticion.entregado = false;
+      historial.push(peticion);
+
+      localStorage.setItem('peticionesEmpleado', JSON.stringify(peticiones));
+      localStorage.setItem('historialPeticiones', JSON.stringify(historial));
+      mostrarSeccion('peticionEmpleado');
+    }
+
+    // Rechaza una petición
+    function rechazarPeticion(id) {
+      let peticiones = JSON.parse(localStorage.getItem('peticionesEmpleado') || '[]');
+      let historial = JSON.parse(localStorage.getItem('historialPeticiones') || '[]');
+
+      const index = peticiones.findIndex(pet => pet.id == id);
+      if (index === -1) return;
+
+      const peticion = peticiones.splice(index, 1)[0];
+      peticion.estado = 'Rechazada';
+      peticion.entregado = false;
+      historial.push(peticion);
+
+      localStorage.setItem('peticionesEmpleado', JSON.stringify(peticiones));
+      localStorage.setItem('historialPeticiones', JSON.stringify(historial));
+      mostrarSeccion('peticionEmpleado');
+    }
+
+    // Muestra el historial de peticiones
+    function mostrarHistorial() {
+      const aceptadosDiv = document.getElementById('aceptados');
+      const rechazadosDiv = document.getElementById('rechazados');
+      const historial = JSON.parse(localStorage.getItem('historialPeticiones') || '[]');
+
+      aceptadosDiv.innerHTML = '';
+      rechazadosDiv.innerHTML = '';
+
+      const aceptados = historial.filter(pet => pet.estado === 'Aceptada');
+      const rechazados = historial.filter(pet => pet.estado === 'Rechazada');
+
+      if (aceptados.length === 0) {
+        aceptadosDiv.innerHTML = '<p>No hay peticiones aceptadas.</p>';
+      } else {
+        aceptados.forEach(pet => {
+          const div = document.createElement('div');
+          div.className = 'peticion-item';
+          div.innerHTML = `
+            <p><strong>Producto:</strong> ${pet.producto}</p>
+            <p><strong>Cantidad:</strong> ${pet.cantidad}</p>
+            <p><strong>Motivo:</strong> ${pet.motivo}</p>
+            <p><strong>Entregado:</strong> ${pet.entregado ? 'Sí' : 'No'}</p>
+            <div style="margin-top: 10px;">
+              ${pet.entregado
+                ? `<button class="btn btn-eliminar" onclick="eliminarPedidoHistorial('${pet.id}')">Eliminar pedido</button>`
+                : `<button class="btn btn-entrega" onclick="confirmarEntrega('${pet.id}')">Confirmar entrega</button>`}
+              <button class="btn btn-rechazar" onclick="moverARechazados('${pet.id}')">Proveedor canceló</button>
+            </div>
+          `;
+          aceptadosDiv.appendChild(div);
+        });
+      }
+
+      if (rechazados.length === 0) {
+        rechazadosDiv.innerHTML = '<p>No hay peticiones rechazadas.</p>';
+      } else {
+        rechazados.forEach(pet => {
+          const div = document.createElement('div');
+          div.className = 'peticion-item';
+          div.innerHTML = `
+            <p><strong>Producto:</strong> ${pet.producto}</p>
+            <p><strong>Cantidad:</strong> ${pet.cantidad}</p>
+            <p><strong>Motivo:</strong> ${pet.motivo}</p>
+            <div style="margin-top: 10px;">
+              <button class="btn btn-aceptar" onclick="moverAAceptados('${pet.id}')">Proveedor aceptó</button>
+            </div>
+          `;
+          rechazadosDiv.appendChild(div);
+        });
+      }
+    }
+
+    // Cambia una petición de aceptada a rechazada
+    function moverARechazados(id) {
+      let historial = JSON.parse(localStorage.getItem('historialPeticiones') || '[]');
+      historial = historial.map(pet => {
+        if (pet.id == id && pet.estado === 'Aceptada') {
+          pet.estado = 'Rechazada';
+          pet.entregado = false;
+        }
+        return pet;
+      });
+      localStorage.setItem('historialPeticiones', JSON.stringify(historial));
+      mostrarHistorial();
+    }
+
+    // Cambia una petición de rechazada a aceptada
+    function moverAAceptados(id) {
+      let historial = JSON.parse(localStorage.getItem('historialPeticiones') || '[]');
+      historial = historial.map(pet => {
+        if (pet.id == id && pet.estado === 'Rechazada') {
+          pet.estado = 'Aceptada';
+          pet.entregado = false;
+        }
+        return pet;
+      });
+      localStorage.setItem('historialPeticiones', JSON.stringify(historial));
+      mostrarHistorial();
+    }
+
+    // Marca una petición como entregada
+    function confirmarEntrega(id) {
+      let historial = JSON.parse(localStorage.getItem('historialPeticiones') || '[]');
+      historial = historial.map(pet => {
+        if (pet.id == id && pet.estado === 'Aceptada') {
+          pet.entregado = true;
+        }
+        return pet;
+      });
+      localStorage.setItem('historialPeticiones', JSON.stringify(historial));
+      mostrarHistorial();
+    }
+
+    // Elimina una petición del historial si ya fue entregada
+    function eliminarPedidoHistorial(id) {
+      let historial = JSON.parse(localStorage.getItem('historialPeticiones') || '[]');
+      historial = historial.filter(pet => !(pet.id == id && pet.entregado));
+      localStorage.setItem('historialPeticiones', JSON.stringify(historial));
+      mostrarHistorial();
+    }
+
+    // Mostrar la sección de cuenta por defecto al cargar
+    mostrarSeccion('cuenta');
+  </script>
+</body>
+</html>

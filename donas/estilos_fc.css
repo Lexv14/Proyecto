@@ -1,0 +1,150 @@
+/* --- Reset y estilos globales --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- Body --- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    padding: 50px 20px;
+}
+
+/* --- Contenedor principal --- */
+.contenedor-principal {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* --- Contenedor del formulario --- */
+.form-container {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+}
+
+/* --- Título --- */
+.form-container h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333333;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* --- Mensaje de error --- */
+.form-container .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* --- Etiquetas --- */
+.form-container label {
+    display: block;
+    font-size: 14px;
+    color: #555555;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+/* --- Inputs y textarea --- */
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.form-container input:focus,
+.form-container textarea:focus {
+    border-color: #ff6600;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.2);
+}
+
+/* --- Botón de envío --- */
+.form-container button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease-in-out;
+    margin-top: 10px;
+}
+
+.form-container button[type="submit"]:hover {
+    background-color: #e65c00;
+}
+
+/* --- Contenedor del método de pago --- */
+.metodo-pago-container {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.metodo-pago-container h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #333;
+}
+
+.metodo-pago-container label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: 600;
+    color: #555;
+}
+
+.metodo-pago-container select,
+.metodo-pago-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.metodo-pago-container p {
+    margin-top: 10px;
+    color: #444;
+    font-size: 14px;
+}
+

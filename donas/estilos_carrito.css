@@ -1,0 +1,403 @@
+/* --- Header --- */
+.header {
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 3px solid #E84300;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    text-decoration: none;
+
+}
+
+.header-logo a {
+    color: #E84300;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.header-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.header-nav a.boton {
+    border-radius: 20px;
+    font-weight: bold;
+    margin-left: 15px;
+    padding: 8px 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header-nav a.boton:not(.boton-carrito) {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.header-nav a.boton:not(.boton-carrito):hover {
+    background-color: #e0e0e0;
+}
+
+.header-nav a.boton-carrito {
+    background-color: #EC008C;
+    color: #fff;
+}
+
+.header-nav a.boton-carrito:hover {
+    background-color: #c9007a;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    padding-bottom: 80px; /* Ajusta si el footer no está fijo */
+    margin: 0;
+    padding: 0;
+}
+
+/* --- General Body Style for Cart Page --- */
+body.pagina-carrito {
+    background-color: #fdfcfe; /* Very light, almost white background as per image */
+    color: #333;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* --- Main Content Wrapper for Cart --- */
+.main-content-carrito {
+    max-width: 1100px; /* Adjusted max-width for the layout */
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.main-content-carrito h1 { /* "MI CARRITO" */
+    font-size: 28px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+/* --- Empty Cart Specific Styles --- */
+.empty-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #777;
+    padding: 50px 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.acciones-carrito-vacio {
+    text-align: center;
+    margin-top: 25px;
+}
+.boton-grande-naranja {
+    background-color: #E84300;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+.boton-grande-naranja:hover {
+    background-color: #c73a00;
+}
+
+
+/* --- Two-column layout for cart items and summary --- */
+.carrito-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow summary to stack on smaller screens */
+    gap: 25px; /* Gap between items column and summary column */
+}
+
+/* --- Cart Items Section (Left Column) --- */
+.carrito-items-columna {
+    flex: 2.5; /* Takes more space, e.g., 65-70% */
+    min-width: 400px;
+}
+
+.tabla-carrito {
+    width: 100%;
+    background-color: #fff; /* White background for the items table area */
+    border-radius: 8px; /* Rounded corners for the entire block */
+    /* No shadow on table directly, items rows will have bottom border */
+}
+
+.fila-encabezado, .fila-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px; /* Padding for rows */
+}
+
+.fila-encabezado {
+    color: #666; /* Lighter color for headers */
+    font-weight: 500; /* Normal weight for headers in image */
+    font-size: 14px; /* Smaller font for headers */
+    border-bottom: 1px solid #eaeaea; /* Separator line */
+    text-transform: none; /* "Producto" not uppercase in image */
+}
+
+.fila-item {
+    border-bottom: 1px solid #eaeaea; /* Separator between items */
+}
+.fila-item:last-child {
+    border-bottom: none; /* No border for the last item */
+}
+
+/* Column widths */
+.col-producto       { flex: 3; display: flex; align-items: center; padding-right: 15px;}
+.col-precio         { flex: 1; text-align: left; color: #333; font-weight: 500;}
+.col-cantidad-header{ flex: 1.2; text-align: center;} /* Header for "Cantidad" */
+.col-cantidad       { flex: 1.2; display: flex; align-items: center; justify-content: center; }
+.col-subtotal       { flex: 1; text-align: left; color: #333; font-weight: 500;}
+.col-acciones-header{ flex: 0.5; } /* Header for actions column */
+.col-acciones       { flex: 0.5; text-align: right; display: flex; justify-content: flex-end; gap: 5px;}
+
+.item-imagen-carrito {
+    width: 50px; /* Smaller image */
+    height: 50px;
+    object-fit: contain; /* Use contain to see full image */
+    margin-right: 15px;
+    border-radius: 6px; /* Slightly rounded corners for image */
+    /* background-color: #f0f0f0; Optional background for image container */
+}
+
+.col-producto span { /* Product name */
+    font-weight: 500;
+    color: #333;
+    font-size: 15px;
+}
+
+.form-cantidad {
+    display: inline-flex; /* Align items in form */
+    align-items: center;
+}
+.btn-ajuste-cantidad {
+    background-color: #f0f0f0; /* Light grey buttons */
+    border: 1px solid #e0e0e0;
+    color: #555;
+    padding: 2px 6px; /* Smaller padding */
+    cursor: pointer;
+    font-size: 16px; /* Larger plus/minus symbols */
+    border-radius: 15px; /* Circular/Pill shaped */
+    line-height: 1;
+    width: 26px; /* Fixed width */
+    height: 26px; /* Fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-ajuste-cantidad:hover {
+    background-color: #e0e0e0;
+    border-color: #d0d0d0;
+}
+.texto-cantidad {
+    min-width: 25px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 15px;
+    color: #333;
+    margin: 0 8px; /* Space around quantity number */
+}
+
+.form-accion-item { display: inline-block; }
+.btn-accion-item {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 1.1em; /* For emoji/icon size */
+    color: #777; /* Neutral color for icons */
+}
+.btn-accion-item.btn-eliminar:hover {
+    color: #E84300; /* Dunkin Orange for delete hover */
+}
+/* .btn-accion-item.btn-editar:hover { color: #007bff; } */
+
+
+.enlace-seguir-comprando {
+    display: inline-block;
+    margin-top: 25px;
+    color: #333; /* Darker, less prominent */
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+}
+.enlace-seguir-comprando:hover {
+    color: #E84300; /* Orange on hover */
+    text-decoration: underline;
+}
+
+/* --- Order Summary Section (Right Column) --- */
+.resumen-pedido-columna {
+    flex: 1; /* Takes less space, e.g., 30-35% */
+    min-width: 280px;
+    background-color: #f7f7f7; /* Light grey background for summary box */
+    padding: 25px;
+    border-radius: 8px;
+    /* box-shadow: 0 2px 8px rgba(0,0,0,0.08); */ /* Subtle shadow if desired */
+    height: fit-content;
+}
+
+.linea-resumen {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 15px; /* Standard font size */
+}
+.linea-resumen span:first-child { /* Label like "Subtotal" */
+    color: #555; /* Greyish color for labels */
+}
+.linea-resumen span:last-child { /* Value */
+    font-weight: 600; /* Bolder value */
+    color: #333;
+}
+
+.total-pedido-resumen {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd; /* Separator line for total */
+}
+.total-pedido-resumen strong { /* Both "Total Pedido" label and value */
+    font-size: 18px; /* Larger font for total line */
+    color: #333;
+    font-weight: 700;
+}
+.total-pedido-resumen strong:last-child { /* The amount */
+    color: #E84300; /* Dunkin Orange for total amount */
+    font-size: 22px; /* Even larger for the final amount */
+}
+
+.btn-continuar-compra {
+    background-color: #E84300; /* Dunkin Orange */
+    color: white;
+    border: none;
+    padding: 14px 20px; /* Slightly larger padding */
+    width: 100%;
+    text-align: center;
+    font-size: 16px; /* Font size for button text */
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 25px;
+    text-transform: uppercase; /* As per image */
+    letter-spacing: 0.5px;
+}
+.btn-continuar-compra:hover {
+    background-color: #c73a00; /* Darker orange */
+}
+
+
+/* --- Responsive Adjustments for Cart Page --- */
+@media (max-width: 992px) { /* Tablet */
+    .main-content-carrito h1 {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+    .col-producto       { flex: 2.5; }
+    .col-precio         { flex: 0.8; font-size: 14px; }
+    .col-cantidad-header{ flex: 1; }
+    .col-cantidad       { flex: 1; }
+    .col-subtotal       { flex: 0.8; font-size: 14px;}
+    .col-acciones-header{ flex: 0.4; }
+    .col-acciones       { flex: 0.4; }
+
+    .item-imagen-carrito { width: 45px; height: 45px; margin-right: 10px;}
+    .col-producto span { font-size: 14px; }
+    .texto-cantidad { font-size: 14px; margin: 0 6px;}
+    .btn-ajuste-cantidad { width: 24px; height: 24px; font-size: 14px; }
+}
+
+
+@media (max-width: 768px) { /* Mobile */
+    .main-content-carrito {
+        padding: 15px;
+        margin-top: 20px;
+    }
+    .main-content-carrito h1 {
+        font-size: 22px;
+        text-align: center; /* Center title on small screens */
+        margin-bottom: 20px;
+    }
+    .carrito-container {
+        flex-direction: column; /* Stack items and summary */
+        gap: 20px;
+    }
+    .carrito-items-columna, .resumen-pedido-columna {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .fila-encabezado {
+        display: none; /* Hide header row on small screens */
+    }
+    .fila-item {
+        flex-direction: column; /* Stack item details vertically */
+        align-items: stretch; /* Stretch to full width */
+        padding: 15px;
+        position: relative; /* For absolute positioning of actions if needed */
+    }
+
+    .col-producto, .col-precio, .col-cantidad, .col-subtotal, .col-acciones {
+        flex-basis: auto;
+        width: 100%;
+        text-align: left;
+        padding: 6px 0;
+        display: flex;
+        justify-content: space-between; /* Label (via ::before) and value */
+        align-items: center;
+    }
+    .col-producto { /* Keep image and name somewhat together, but name might wrap */
+        justify-content: flex-start; /* Align image and name to the left */
+        margin-bottom: 8px;
+    }
+    .item-imagen-carrito { width: 50px; height: 50px; margin-right: 12px;}
+    .col-producto span { font-size: 15px; }
+
+
+    /* Add labels for table-like cells on small screens */
+    .col-precio::before   { content: 'Precio:'; font-weight: bold; color: #555; }
+    .col-cantidad::before { content: 'Cantidad:'; font-weight: bold; color: #555;}
+    .col-subtotal::before { content: 'Subtotal:'; font-weight: bold; color: #555;}
+
+    .col-cantidad {
+        justify-content: flex-end; /* Move quantity controls to the right of label */
+    }
+     .col-cantidad .form-cantidad:first-of-type { margin-left: auto; } /* Push controls */
+
+
+    .col-acciones { /* Position actions more prominently if needed, e.g., top right */
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: auto; /* Override full width */
+        padding: 0;
+    }
+    .btn-accion-item { font-size: 1.3em; }
+
+
+    .resumen-pedido-columna { padding: 20px; }
+    .linea-resumen span, .total-pedido-resumen strong { font-size: 14px; }
+    .total-pedido-resumen strong:last-child { font-size: 18px; }
+    .btn-continuar-compra { font-size: 15px; padding: 12px 15px;}
+}
+
+.footer {
+    background-color: #333;
+    bottom: 0;
+    color: #f0f0f0;
+    font-size: 0.9em;
+    left: 0;
+    padding: 20px;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+}
