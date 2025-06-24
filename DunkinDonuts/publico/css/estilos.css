@@ -1,0 +1,359 @@
+/* === ESTILOS GLOBALES === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #3e2723;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    color: #e65100;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+/* === HEADER Y FOOTER === */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #fff;
+    border-bottom: 3px solid #E84300;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 30px; /* <-- AÑADIR ESTA LÍNEA para espaciar los elementos */
+}
+
+.header-logo a {
+    font-size: 28px;
+    font-weight: bold;
+    color: #E84300;
+    text-decoration: none;
+}
+
+.header-nav {
+    display: flex; /* <-- CORREGIDO */
+    gap: 15px;
+    align-items: center;
+    margin-left: auto;
+}
+
+.header-visitas {
+    font-size: 14px;
+    color: #555;
+}
+
+.footer {
+    background-color: #333;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    margin-bottom: 0;
+}
+.footer a { color: #fbc02d; }
+
+
+/* === BOTONES === */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primario {
+    background-color: #e65100;
+}
+.btn-primario:hover {
+    background-color: #ff8f00;
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: white;
+}
+
+.btn-secundario {
+    background-color: #6d4c41;
+}
+.btn-secundario:hover {
+    background-color: #8d6e63;
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: white;
+}
+
+.btn-carrito {
+    background-color: #EC008C;
+}
+.btn-carrito:hover {
+    background-color: #c9007a;
+}
+
+.btn-peligro {
+    background-color: #c62828;
+}
+.btn-peligro:hover {
+    background-color: #ef5350;
+}
+
+
+/* === FORMULARIOS (LOGIN, REGISTRO, CONTACTO) === */
+.form-container {
+    max-width: 450px;
+    margin: 40px auto;
+    padding: 30px 40px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1, .form-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #3e2723;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"],
+.form-container input[type="number"],
+.form-container textarea,
+.form-container select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #bcaaa4;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.form-container input:focus,
+.form-container textarea:focus,
+.form-container select:focus {
+    border-color: #fbc02d;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(251, 192, 45, 0.2);
+}
+
+.password-wrapper {
+    position: relative;
+}
+.password-wrapper input {
+    padding-right: 40px;
+}
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+}
+.mensaje-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.mensaje-exito {
+    padding: 10px;
+    background-color: #d4edda;
+    color: #155724;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+
+/* === TIENDA Y PRODUCTOS === */
+.product-container {
+    display: grid;
+    gap: 25px;
+    /* Por defecto, una columna para celulares */
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+    .product-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .product-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.producto-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+.producto-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.producto-imagen {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.producto-info {
+    padding: 15px;
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.producto-info h3 { margin-bottom: 10px; }
+.producto-info p {
+    flex-grow: 1;
+    margin-bottom: 15px;
+    color: #5d4037;
+}
+.producto-precio {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #E84300;
+    margin-bottom: 15px;
+}
+
+/* === CARRITO DE COMPRAS === */
+.carrito-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.carrito-items { flex: 2.5; }
+.carrito-resumen { flex: 1; background: #fffde7; padding: 20px; border-radius: 8px; height: fit-content; }
+.carrito-tabla { width: 100%; border-collapse: collapse; }
+.carrito-tabla th, .carrito-tabla td { padding: 15px; text-align: left; border-bottom: 1px solid #efebe9; }
+.carrito-tabla th { background-color: #fbc02d; }
+.carrito-tabla img { width: 60px; height: 60px; object-fit: contain; border-radius: 4px; }
+.cantidad-control { display: flex; align-items: center; gap: 5px; }
+
+
+/* === PANEL DE ADMIN === */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 250px;
+    background-color: #4e342e;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    background-color: #6d4c41;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+.sidebar a:hover, .sidebar a.activo {
+    background-color: #8d6e63;
+}
+.main-content {
+    flex: 1;
+    padding: 40px;
+    background-color: #ffffff;
+}
+.tabla-admin {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.tabla-admin th, .tabla-admin td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+.tabla-admin th {
+    background-color: #6d4c41;
+    color: white;
+}
+.tabla-admin tr:nth-child(even) { background-color: #f2f2f2; }
+.tabla-admin img { width: 80px; border-radius: 4px; }
+
+
+/* === CHAT FLOTANTE === */
+.chat-icon {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #ff6f61;
+    color: white;
+    font-size: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+.chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 320px;
+    background: white;
+    border: 2px solid #ff6f61;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    padding: 15px;
+    z-index: 1000;
+}
+.chat-popup.visible { display: block; }
